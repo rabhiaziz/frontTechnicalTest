@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <ul class="list-group" *ngFor="let item of files">
+
+                <li class="list-group-item" *ngIf="item.folder">
+                    <button class="btn btn-sm btn-outline-primary" (click)="getChildren(item._links.children)"> <i
+                            class="fa fa-folder"></i> {{item.name}}</button>
+
+                    <div class="input-group mb-3">
+
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                (change)="uploadFile($event,item )" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+
+                    <ul class="list-item" *ngFor="let newFile of newFiles">
+                        <li *ngIf="newFile.folder">{{newFile.name}}</li>
+                        <li *ngIf="!newFile.folder">{{newFile.name}}
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                (click)="downloadFile(newFile)"><i class="fa fa-download"></i></button></li>
+                    </ul>
+                </li>
+
+                <li class="list-group-item" *ngIf="!item.folder"> <i class="fa fa-file"></i> {{item.name}}
+                    <button type="button" class="btn btn-sm btn-outline-primary" (click)="downloadFile(item)"><i
+                            class="fa fa-download"></i></button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
